@@ -15,9 +15,11 @@ def homepage():
 @app.route('/info', methods=['POST'])
 def post_info():
     if not request.json:
-        return "Please enter in JSON", 400
+        return "Please enter request in JSON", 400
+
     info = request.json
     id = collection.insert_one(info).inserted_id
+
     return jsonify(str(id)), 201
 
 @app.route('/info/<id>', methods=['GET'])
@@ -25,10 +27,10 @@ def get_info(id):
     try:
         result = collection.find_one({'_id': ObjectId(id)})
     except errors.InvalidId:
-        return "ID entered invalid", 400
+        return "ID entered invalid, please enter valid ID", 400
 
     if not result:
-        return "Object not found", 404
+        return "ID not found in database", 404
 
     return jsonify({'name': result['name']}), 200
 
@@ -40,7 +42,7 @@ def delete_info(id):
         return "ID entered invalid", 400
 
     if not result:
-        return "Object not found", 404
+        return "ID not found in database", 404
 
     collection.remove({'_id': ObjectId(id)})
 
@@ -54,10 +56,10 @@ def put_info(id):
         return "ID entered invalid", 400
 
     if not result:
-        return "Object not found", 404
+        return "ID not found in database", 404
 
     if not request.json:
-        return "Please enter in JSON", 400
+        return "Please enter request in JSON", 400
 
     info = request.json
 

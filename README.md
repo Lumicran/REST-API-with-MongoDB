@@ -8,7 +8,7 @@ __________________________________
 * Flask
 * MongoDB
 
-Getting Started/Installation
+Getting Started
 __________________________________
 These instructions will get a copy of the project up and running on your local machine.
 
@@ -29,7 +29,7 @@ These instructions will get a copy of the project up and running on your local m
   * To get (Read an existing entry)
     - curl -v -XGET http://localhost:5000/info/<id # of entry>
   * To put (Update an existing entry)
-    - curl -v -XPUT -H "Content-Type: application/json" http://localhost:5000/info/<id of entry> -d '{"name":"<update value"}'
+    - curl -v -XPUT -H "Content-Type: application/json" http://localhost:5000/info/<id of entry> -d '{"name":"<update value>"}'
   * To delete (Delete an existing entry)
     - curl -v -XDELETE http://localhost:5000/info/<id # of entry>
 * Make sure to end the environment!
